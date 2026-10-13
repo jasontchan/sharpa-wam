@@ -1,0 +1,18 @@
+// https://containers.dev/implementors/json_reference/
+{
+    "name": "fr3py-sharpa",
+    "dockerComposeFile": "docker-compose.yaml",
+    "workspaceFolder": "/home/FR3Py",
+    "service": "fr3py_sharpa",
+    "remoteUser": "root",
+    "postCreateCommand": "rm -rf /home/FR3Py/fr3_gripper/external/pybind11 && git clone --branch v2.13.6 --depth 1 https://github.com/pybind/pybind11 /home/FR3Py/fr3_gripper/external/pybind11 && pip install -e /home/FR3Py && mkdir -p /home/FR3Py/fr3_bridge/build && cd /home/FR3Py/fr3_bridge/build && cmake .. && make -j4 && make install && pip install /home/FR3Py/fr3_gripper",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "dbaeumer.vscode-eslint", // Existing ESLint extension
+          "ms-python.python", // Python extension by Microsoft
+          "ms-toolsai.jupyter" // Jupyter extension by Microsoft
+        ]
+      }
+    }
+  }

@@ -1,0 +1,14 @@
+<mujoco model="sharpa_mount">
+  <compiler meshdir="."/>
+
+  <asset>
+    <mesh name="sharpa_mount" file="sharpa_mount_v2.STL" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <worldbody>
+    <body name="sharpa_mount">
+      <geom name="sharpa_mount" type="mesh" mesh="sharpa_mount" mass="0.17"
+            rgba="0.8 0.8 0.8 1"/>
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,24 @@
+include FR3Py/interface_configs/*.yaml   FR3Py/assets
+include FR3Py/assets/urdf/meshes/collision/*.stl
+include FR3Py/assets/urdf/meshes/visual/*.mtl
+include FR3Py/assets/urdf/meshes/visual/*.png
+include FR3Py/assets/urdf/meshes/visual/*.obj
+include FR3Py/assets/urdf/*.urdf
+include FR3Py/assets/usd/*.usda
+include FR3Py/assets/usd/materials/*.png
+include FR3Py/sim/isaac/*.yaml
+include FR3Py/assets/mujoco/meshes/collision/*.stl
+include FR3Py/assets/mujoco/meshes/visual/*.mtl
+include FR3Py/assets/mujoco/meshes/visual/*.png
+include FR3Py/assets/mujoco/meshes/visual/*.obj
+include FR3Py/assets/mujoco/mj_assets/*.obj
+include FR3Py/assets/mujoco/mj_assets/*.stl
+include FR3Py/assets/mujoco/*.urdf
+include FR3Py/assets/mujoco/*.xml
+include FR3Py/assets/sharpa/tactile_map/*.npy
+include FR3Py/assets/sharpa/tactile_map/NOTICE
+include FR3Py/assets/mujoco/sharpa/*.xml
+include FR3Py/assets/mujoco/sharpa/*.py
+include FR3Py/assets/mujoco/sharpa/*.STL
+include FR3Py/assets/mujoco/sharpa/sharpa_wave/*.xml
+include FR3Py/assets/mujoco/sharpa/sharpa_wave/assets/right/*.STL

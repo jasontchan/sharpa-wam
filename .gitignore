@@ -1,0 +1,6 @@
+# Large local artifacts (weights, checkpoints, datasets, caches) stay out of git.
+DexTacWAM/data/datasets/
+DexTacWAM/data/datasets_lerobot/
+DexTacWAM/data/cache/
+MUJOCO_LOG.TXT
+__pycache__/

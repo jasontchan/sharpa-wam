@@ -249,6 +249,18 @@ TASK_REGISTRY: Dict[str, TaskEntry] = {
         short_run_max=5,
         nonoperating_short_run_max=10,
     ),
+    # FR3 + Sharpa Wave MuJoCo sim (FR3Py), scripted demos with synthetic
+    # tactile -- see fr3_integration/. Synthetic tactile has no dropouts, so the
+    # blank windows only matter as the server's health backstop.
+    "fr3_bar_pick": TaskEntry(
+        task_id="fr3_bar_pick",
+        prompt="Pick up the red bar from the two posts with the right hand.",
+        domain="fr3_sharpa_bar_pick",
+        expected_arm_layout="right_only",
+        operating_fingers=(5, 6, 7),
+        short_run_max=5,
+        nonoperating_short_run_max=10,
+    ),
 }
 
 

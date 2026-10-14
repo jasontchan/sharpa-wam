@@ -91,6 +91,8 @@ case "$TASK" in
     # against a bowl/tong-shaped checkpoint: the widths agree at 113 but the
     # view count does not.
     pick_place_cube)  CFG="configs/cube_place/stage3_action_expert.yaml" ;;
+    # FR3 + Sharpa MuJoCo sim proof of concept (fr3_integration/).
+    fr3_bar_pick)     CFG="fr3_integration/configs/fr3_sharpa_bar_pick_stage3.yaml" ;;
     *)          echo "[run_relative] FATAL: set TASK=bowl|placed_tong|unscrew_v2|cube_handover|wipe_white_board|pick_place_cube (got '${TASK}')" >&2
                 echo "    TASK must be a task_registry id; see" >&2
                 echo "      python3 -m data.utils.task_registry --list" >&2

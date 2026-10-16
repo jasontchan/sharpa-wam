@@ -29,8 +29,14 @@ Wait for `listening on 127.0.0.1:5008 — ready`.
 bash FR3Py/examples/dextacwam/real_robot/ssh_tunnel.sh <user>@<l40-host>
 ```
 
-**3. Robot PC devcontainer**: start the `fr3_joint_velocity` bridge (not the
-torque one), then work through the modes in order:
+**3. Robot PC devcontainer**: start the bridge in **velocity** mode (not
+torque), with the robot id the client uses (`--robot-id`, default `fr3`):
+
+```bash
+fr3_joint_interface <robot_ip> fr3 velocity
+```
+
+Then work through the modes in order:
 
 ```bash
 cd /home/FR3Py/examples/dextacwam/real_robot
@@ -57,6 +63,9 @@ checking the full pipeline without hardware:
 python3 real_robot_client.py --mode execute --backend sim --yes
 ```
 
+The camera needs `pyrealsense2` (`pip install pyrealsense2` in the
+devcontainer if `python3 -c "import pyrealsense2"` fails).
+
 ## Scene the policy expects
 
 It was trained in sim, so the real scene should match it:
@@ -70,9 +79,9 @@ It was trained in sim, so the real scene should match it:
 
 - **Arm:** a 100 Hz thread streams joint velocities toward the IK target and
   keeps actively holding position while the policy is queried. This matters
-  because the velocity bridge keeps executing a stale command for up to 1 s
-  (`control_lag < 0.1*1e7` µs in `fr3_joint_velocity.cpp`; 0.1 s was probably
-  intended).
+  because the bridge keeps executing a stale command for up to 2 s
+  (`control_lag < 0.2 * 1e7` µs in `fr3_joint_interface.cpp`; 1 s in
+  `fr3_joint_velocity.cpp`).
 - **Limits:** palm targets are clamped to a workspace box and to 8 mm per
   action. Joints are capped at 0.5 rad/s and kept 0.05 rad inside their
   limits. Hand targets are limited to 0.08 rad per action. All limits are

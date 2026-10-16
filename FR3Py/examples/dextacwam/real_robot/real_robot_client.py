@@ -20,11 +20,12 @@ Modes, in the order you should use them (only `execute` moves the robot):
            predicted targets.
   execute  runs the policy on the robot behind the safety limits below.
 
-Arm control: the FR3 bridge must run fr3_joint_velocity. A 100 Hz thread
-streams joint velocities that track the current joint target (P-control, speed
-capped) and keeps holding it while the policy is being queried. The bridge
-keeps executing a stale velocity for up to 1 s, so the arm is never left
-without an active command.
+Arm control: the FR3 bridge must run in velocity mode
+(`fr3_joint_interface <robot_ip> <robot_id> velocity`). A 100 Hz thread streams
+joint velocities that track the current joint target (P-control, speed capped)
+and keeps holding it while the policy is being queried. The bridge keeps
+executing a stale velocity for up to 2 s, so the arm is never left without an
+active command.
 """
 
 import argparse
@@ -343,7 +344,7 @@ def mode_check(robot, kin, args):
     for i in range(args.check_seconds * 2):
         q, hq = robot.arm_q(), robot.hand_q()
         if q is None:
-            print("[check] no arm state (is the fr3_joint_velocity bridge running?)")
+            print("[check] no arm state (is `fr3_joint_interface <ip> <id> velocity` running?)")
         else:
             set_kinematics(kin, q, hq)
             p = kin.palm_T()[:3, 3]
@@ -510,7 +511,8 @@ def main():
 
     if args.mode == "execute" and not confirm(
             "[execute] This MOVES the real FR3 + Sharpa. Check that:\n"
-            "  * the bridge is fr3_joint_velocity (NOT torque) and the e-stop is in reach,\n"
+            "  * the bridge runs `fr3_joint_interface <ip> <id> velocity` (NOT torque),\n"
+            "    and the e-stop is in reach,\n"
             "  * --mode shadow predictions looked sane for this scene,\n"
             f"  * the workspace box {WORKSPACE_LO.round(2)}..{WORKSPACE_HI.round(2)} m is clear."):
         raise SystemExit("aborted")
